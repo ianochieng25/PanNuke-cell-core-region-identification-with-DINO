@@ -1,0 +1,131 @@
+# PanNuke Nuclei Segmentation with DINO Self-Supervision
+
+This project implements a deep learning pipeline for nuclei segmentation and classification on the [PanNuke dataset](https://www.kaggle.com/datasets/andrewmvd/cancer-inst-segmentation-and-classification) (Kaggle Mirror, split into 3 parts). It leverages **DINO (Self-distillation with no labels)** to pre-train a Vision Transformer (ViT) backbone on histopathology images, followed by a segmentation task using a TransUNet-inspired architecture.
+
+## 🌟 Key Features
+
+*   **End-to-End Pipeline**: Automated workflow from data preprocessing to inference.
+*   **Self-Supervised Learning**: Uses DINO to learn robust feature representations from unlabeled histopathology patches.
+*   **Advanced Segmentation**: Fine-tunes a segmentation model (TransUNet) using the pre-trained ViT backbone.
+*   **Efficient Data Handling**: Uses memory mapping (`numpy.memmap`) to handle large datasets without overloading RAM.
+*   **Visualization**: Built-in tools to generate overlay visualizations of predictions vs. ground truth.
+
+## 🛠️ Installation
+
+1.  **Clone the repository**
+    ```bash
+    cd git clone https://github.com/ThomAS122102RAY/PanNuke-cell-core-region-identification-with-DINO.git
+    cd PanNuke-cell-core-region-identification-with-DINO
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+    **Requirements:**
+    *   Python 3.8+
+    *   PyTorch >= 1.9.0
+    *   torchvision
+    *   timm
+    *   albumentations
+    *   opencv-python
+    *   scikit-learn
+    *   matplotlib
+
+## 📂 Dataset Preparation
+
+1.  Download the **PanNuke Dataset** (Fold 1, 2, 3).
+2.  Organize the data in the `data/pannuke` directory as follows:
+    ```
+    data/pannuke/
+    ├── Fold 1/
+    │   ├── images.npy
+    │   ├── masks.npy
+    │   └── types.npy
+    ├── Fold 2/
+    └── Fold 3/
+    ```
+3.  The pipeline will automatically merge and split these into `train` and `test` sets.
+
+## 🚀 Usage
+
+The project is controlled by a single main script that handles the entire workflow.
+
+### Run the Pipeline
+
+```bash
+python main_pipeline_fixed_dino_guard.py
+```
+
+You will be prompted to select a mode:
+
+1.  **Train DINO (train)**:
+    *   Extracts patches from the dataset.
+    *   Runs DINO self-supervised pre-training.
+    *   Trains the segmentation head.
+    *   Evaluates and visualizes results.
+
+2.  **Finetune with Official Weights (finetune)**:
+    *   Downloads/Uses official DINO ViT-Small weights.
+    *   Fine-tunes the segmentation model on your data.
+
+3.  **Inference (inference)**:
+    *   Uses an existing checkpoint to generate predictions and visualizations.
+
+### Visualization Only
+
+If you want to generate visualizations for existing predictions:
+
+```bash
+python visualize_predictions.py --split test --num_samples 20
+```
+
+## 📁 Project Structure
+
+```
+.
+├── main_pipeline_fixed_dino_guard.py  # Main entry point
+├── visualize_predictions.py           # Visualization utility
+├── requirements.txt                   # Dependencies
+├── data/                              # Dataset directory
+├── dino/                              # DINO algorithm implementation
+├── segmentor/                         # Segmentation model & training
+│   ├── train_segmentor.py
+│   ├── predict_segmentor.py
+│   └── transunet.py                   # Model architecture
+├── preprocess/                        # Data loading & processing
+└── checkpoints/                       # Saved models
+```
+
+## 🚀 Infer project
+
+https://drive.google.com/drive/folders/1yuawMmNe9MUD4C2ZwITexpe4oi8KLW9a?usp=sharing
+
+How to use
+*   **For jpg/png folder**: (python inference.py --input "C:/path/to/images" --output "results" --weights "model_final.pth" ) type in terminal
+*   **For npy folder**: (python inference.py --input "C:/path/to/pannuke" --output "results" --weights "model_final.pth" --pannuke_format) type in terminal
+
+## 📊 Results
+
+<img width="426" height="177" alt="螢幕擷取畫面 2025-11-23 005802" src="https://github.com/user-attachments/assets/e31e5486-296f-4134-9a69-b1bd3f0a81e5" />
+
+The pipeline generates:
+
+*   **Metrics**: IoU and Dice scores for Background and Cells.
+*   **Visualizations**: Saved in `visualizations/` folder, showing:
+    *   Original Image
+    *   Ground Truth Mask
+    *   Predicted Mask
+    *   Overlays for easy comparison
+
+<img width="1771" height="1194" alt="sample_0456" src="https://github.com/user-attachments/assets/5ce438a8-f084-49ef-9509-bd2af8be87c9" />
+<img width="1771" height="1194" alt="sample_0419" src="https://github.com/user-attachments/assets/3cc920cc-f6ec-4c36-a183-7479b302b458" />
+<img width="1771" height="1194" alt="sample_0356" src="https://github.com/user-attachments/assets/b6611a1c-06cc-4ced-8df6-1fc830c32565" />
+<img width="1771" height="1194" alt="sample_0102" src="https://github.com/user-attachments/assets/c4fb82fb-1841-44e7-8890-fc275b0e1a6f" />
+<img width="1771" height="1194" alt="sample_2619" src="https://github.com/user-attachments/assets/ac07348a-bd32-4a83-aff1-1ea22a98aecf" />
+<img width="1771" height="1194" alt="sample_2233" src="https://github.com/user-attachments/assets/cf9102a0-bd11-41a5-aaa7-ad69932b79b7" />
+<img width="1771" height="1194" alt="sample_1126" src="https://github.com/user-attachments/assets/5502ce7c-ced5-470c-9ded-61dc55b4f728" />
+<img width="1771" height="1194" alt="sample_1003" src="https://github.com/user-attachments/assets/4ebaac67-3c06-4f77-84b4-7e2b44ea8a53" />
+<img width="1771" height="1194" alt="sample_0914" src="https://github.com/user-attachments/assets/489e2eaf-fb6d-4be0-b533-2ec8e368efb1" />
+<img width="1771" height="1194" alt="sample_0571" src="https://github.com/user-attachments/assets/6ee45fa0-c886-4144-a2d0-73195e52c489" />
