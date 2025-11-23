@@ -35,18 +35,30 @@ This project implements a deep learning pipeline for nuclei segmentation and cla
 
 ## 📂 Dataset Preparation
 
-1.  Download the **PanNuke Dataset** (Fold 1, 2, 3).
-2.  Organize the data in the `data/pannuke` directory as follows:
+1.  Download the **PanNuke Dataset** from Kaggle (see [DOWNLOAD_INSTRUCTIONS.md](DOWNLOAD_INSTRUCTIONS.md) for links to all 3 parts).
+2.  Extract and organize the data in the `data/pannuke` directory as follows:
     ```
     data/pannuke/
     ├── Fold 1/
-    │   ├── images.npy
-    │   ├── masks.npy
-    │   └── types.npy
+    │   ├── 1_images.npy  (or images.npy)
+    │   ├── 1_masks.npy   (or masks.npy)
+    │   └── 1_types.npy   (or types.npy)
     ├── Fold 2/
+    │   ├── 2_images.npy
+    │   ├── 2_masks.npy
+    │   └── 2_types.npy
     └── Fold 3/
+        ├── 3_images.npy
+        ├── 3_masks.npy
+        └── 3_types.npy
     ```
-3.  The pipeline will automatically merge and split these into `train` and `test` sets.
+    **Note**: The pipeline supports both naming conventions (`images.npy` or `1_images.npy`).
+    
+3.  **Automatic Split**: When you run the main pipeline, it will automatically:
+    *   Copy files from `Fold 1` and `Fold 2` → `data/pannuke/train/`
+    *   Copy files from `Fold 3` → `data/pannuke/test/`
+    *   Merge multiple `.npy` shards into single files for efficient training
+
 
 ## 🚀 Usage
 
@@ -98,13 +110,50 @@ python visualize_predictions.py --split test --num_samples 20
 └── checkpoints/                       # Saved models
 ```
 
-## 🚀 Infer project
+## 🚀 Standalone Inference
 
-https://drive.google.com/drive/folders/1yuawMmNe9MUD4C2ZwITexpe4oi8KLW9a?usp=sharing
+A standalone inference tool is available in `pannuke_inference_dist/` for easy prediction on new images.
 
-How to use
-*   **For jpg/png folder**: (python inference.py --input "C:/path/to/images" --output "results" --weights "model_final.pth" ) type in terminal
-*   **For npy folder**: (python inference.py --input "C:/path/to/pannuke" --output "results" --weights "model_final.pth" --pannuke_format) type in terminal
+### Quick Start (Interactive Mode)
+
+Simply run the script directly - it will prompt you for the model path:
+```bash
+cd pannuke_inference_dist
+python inference.py
+```
+You'll be asked to provide:
+- Input folder path (defaults to `data/pannuke/test` if available)
+- Model weights path (`.pth` file)
+
+### Command Line Mode
+
+For batch processing or automation:
+
+**For regular images (jpg/png)**:
+```bash
+python inference.py \
+    --input "C:/path/to/images" \
+    --output "results" \
+    --weights "path/to/model_final.pth"
+```
+
+**For PanNuke format (.npy files)**:
+```bash
+python inference.py \
+    --input "C:/path/to/pannuke/folder" \
+    --output "results" \
+    --weights "path/to/model_final.pth" \
+    --pannuke_format
+```
+
+### Output Files
+
+The inference generates three types of visualizations for each image:
+- `*_mask.png` - Binary segmentation mask (white=cells, black=background)
+- `*_overlay.jpg` - **Dual-color overlay** (Blue=Cells, Yellow=Background) blended with original image
+- `*_combined.jpg` - Side-by-side comparison (original | mask)
+
+**Pre-trained Model**: Download from [Google Drive](https://drive.google.com/drive/folders/1yuawMmNe9MUD4C2ZwITexpe4oi8KLW9a?usp=sharing)
 
 ## 📊 Results
 
@@ -113,11 +162,12 @@ How to use
 The pipeline generates:
 
 *   **Metrics**: IoU and Dice scores for Background and Cells.
-*   **Visualizations**: Saved in `visualizations/` folder, showing:
+*   **Visualizations**: Saved in `visualizations/` and `inference_results/` folders, showing:
     *   Original Image
-    *   Ground Truth Mask
+    *   Ground Truth Mask (training only)
     *   Predicted Mask
-    *   Overlays for easy comparison
+    *   **Dual-Color Overlay**: Blue for Cells, Yellow for Background
+    *   Side-by-side comparisons for easy evaluation
 
 <img width="1771" height="1194" alt="sample_0456" src="https://github.com/user-attachments/assets/5ce438a8-f084-49ef-9509-bd2af8be87c9" />
 <img width="1771" height="1194" alt="sample_0419" src="https://github.com/user-attachments/assets/3cc920cc-f6ec-4c36-a183-7479b302b458" />
