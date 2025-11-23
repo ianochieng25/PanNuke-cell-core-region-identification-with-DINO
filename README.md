@@ -153,7 +153,7 @@ The inference generates three types of visualizations for each image:
 - `*_overlay.jpg` - **Dual-color overlay** (Blue=Cells, Yellow=Background) blended with original image
 - `*_combined.jpg` - Side-by-side comparison (original | mask)
 
-**Pre-trained Model**: Download from [Google Drive](https://drive.google.com/drive/folders/1yuawMmNe9MUD4C2ZwITexpe4oi8KLW9a?usp=sharing)
+**Pre-trained Model**: Download from [Google Drive](https://drive.google.com/file/d/1rpBq-JBCZovthO9diK5G1jJEAiNiZTON/view?usp=drive_link)
 
 ## 📊 Results
 
